@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Message with Button</title>
+    <!-- Include the Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center h-screen">
+    <div class="text-center">
+        <!-- Display the message -->
+        <p class="text-white mb-6">Your Message Here</p>
+        <!-- Button with text and link -->
+        <a href="YOUR_LINK_HERE" class="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">Button Text</a>
+    </div>
+
+    <script>
+        // This script sets the message, button text, and button link dynamically
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const message = urlParams.get('message') || 'Default Message';
+            const buttonText = urlParams.get('buttonText') || 'Click Me';
+            const buttonLink = urlParams.get('buttonLink') || '#';
+
+            document.title = message;
+            document.querySelector('p').textContent = message;
+            const button = document.querySelector('a');
+            button.textContent = buttonText;
+            button.href = buttonLink;
+        }
+    </script>
+</body>
+
+</html>
