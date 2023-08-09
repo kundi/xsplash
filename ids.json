@@ -1,0 +1,12 @@
+{
+  "reactivate": {
+    "message": "Your 14-day trial was successfully reactivated. You can now utilize Nightwatch to improve your website visibility at its full power.",
+    "buttonText": "Signin to Account",
+    "buttonLink": "https://app.nightwatch.io/signin?ref=reactivation"
+  },
+  "identifier2": {
+    "message": "Message for Identifier2",
+    "buttonText": "Button for Identifier2",
+    "buttonLink": "http://example.com/link2"
+  }
+}
