@@ -6,7 +6,7 @@
   },
   "nouser": {
     "message": "No user matching the criteria. You can still register a new users and start using Nightwatch.",
-    "buttonText": "Sign-up to Nightwatch",
+    "buttonText": "Sign-up Now",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
   },
   "identifier2": {
