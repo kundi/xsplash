@@ -4,6 +4,11 @@
     "buttonText": "Login to Nightwatch",
     "buttonLink": "https://app.nightwatch.io/login?ref=reactivation"
   },
+  "nouser": {
+    "message": "No user matching the criteria. You can still register a new users and start using Nightwatch.",
+    "buttonText": "Sign-up to Nightwatch",
+    "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
+  },
   "identifier2": {
     "message": "Message for Identifier2",
     "buttonText": "Button for Identifier2",
