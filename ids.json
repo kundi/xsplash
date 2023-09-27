@@ -9,6 +9,12 @@
     "buttonText": "Sign-up Now",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
   },
+  "nps": {
+    "message": "Thank you for your feedback. What could we improve?",
+    "input": true,
+    "buttonText": "Send Feedback",
+    "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
+  },
   "identifier2": {
     "message": "Message for Identifier2",
     "buttonText": "Button for Identifier2",
