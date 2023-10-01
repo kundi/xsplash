@@ -2,56 +2,122 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nightwatch Request</title>
-    <!-- Include the Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: black;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nightwatch Request</title>
+  <!-- Include the Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: black;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body class="flex items-center justify-center h-screen">
-    <div class="text-center">
-        <!-- Display the message -->
-        <p class="text-white mb-6">Loading...</p>
-        <!-- Button with text and link -->
-        <a href="#" class="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">Loading...</a>
+  <div class="text-center">
+
+    <div class="logo flex justify-center items-center mb-4">
+        <a href="https://nightwatch.io/?ref+splash">
+            <img src="logo.svg" alt="Nightwatch" class="w-24" />
+        </a>
     </div>
 
-<script>
-  window.onload = function () {
-    const identifier = new URLSearchParams(window.location.search).get('id');
+    <div id="userMessage">
+      <!-- Display the message -->
+      <p class="text-white mb-6">Loading...</p>
+      <!-- Button with text and link -->
+      <a href="#" class="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">Loading...</a>
+    </div>
 
-    if (!identifier || !/^[a-zA-Z0-9-_]+$/.test(identifier)) {
-      console.error('Invalid identifier provided.');
-      return;
-    }
+    <div id="userInput" class="input" style="display: none">
+      <form id="userForm">
+        <p class="text-white mb-6">Loading...</p>
+        <textarea name="message" id="message" rows="4" placeholder="Please explain your rating"
+          class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset my-5"></textarea>
+        <button type="submit" class="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
+          Loading...
+        </button>
+        <!-- Error message div -->
+        <div id="errorMessage" class="mt-4 text-red-500 hidden" style="display: none;">
+          
+        </div>
+      </form>
+    </div>
+  </div>
 
-    // Fetch the JSON data from your endpoint
-    const endpoint = 'https://splash.nightwatch.io/'  
-    fetch(endpoint + '/ids.json')
-      .then(response => response.json())
-      .then(data => {
+  <script>
+    /*
+there are two modes:
+1. message with button
+2. feedback input with message
+*/
+    $(document).ready(function () {
+      const identifier = new URLSearchParams(window.location.search).get(
+        "id"
+      );
+
+      if (!identifier || !/^[a-zA-Z0-9-_]+$/.test(identifier)) {
+        console.error("Invalid identifier provided.");
+        return;
+      }
+
+      // Fetch the JSON data from your endpoint
+      // const endpoint = 'https://splash.nightwatch.io';
+      const endpoint = "http://localhost:8001";
+
+      $.getJSON(endpoint + "/ids.json", function (data) {
         if (data[identifier]) {
-          document.title = data[identifier].message;
-          document.querySelector('p').textContent = data[identifier].message;
-          const button = document.querySelector('a');
-          button.textContent = data[identifier].buttonText;
-          button.href = data[identifier].buttonLink;
-        } else {
-          console.error('Identifier not found in the data.');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }
-</script>
+          window.splash = data[identifier];
 
+          init(data[identifier]);
+        } else {
+          console.error("Identifier not found in the data.");
+        }
+      }).fail(function (jqxhr, textStatus, error) {
+        console.error("Error fetching data:", error);
+      });
+    });
+
+    function init(splash) {
+      document.title = splash.message;
+      $("#userMessage p").text(splash.message);
+
+      const $button = $("#userMessage a");
+      $button.text(splash.buttonText);
+      $button.attr("href", splash.buttonLink);
+
+      if (splash.input) {
+        $("#userMessage").hide();
+        $("#userInput").show();
+
+        $("#userInput p").text(splash.inputMessage);
+        const $inputButton = $("#userInput button");
+        $inputButton.text(splash.inputButtonText);
+
+        $("#userForm").submit(function (e) {
+          e.preventDefault();
+
+          $.ajax({
+            type: "POST",
+            url: splash.inputSubmitUrl,
+            data: $(this).serialize(),
+            success: function (response) {
+              // Here you handle what to do when submission is successful.
+              $("#userInput").hide();
+              $("#userMessage").show();
+            },
+            error: function (error) {
+              // Handle errors here, maybe alert the user?
+              console.log(error);
+            },
+          });
+        });
+      }
+    }
+  </script>
 </body>
 
 </html>

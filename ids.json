@@ -10,8 +10,11 @@
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
   },
   "nps": {
-    "message": "Thank you for your feedback. What could we improve?",
     "input": true,
+    "inputMessage": "Thank you for your feedback. What could we improve?",
+    "inputButtonText": "Send Feedback",
+    "inputSubmitUrl": "https://app.nightwatch.io/signup?ref=nouser",
+    "message": "Thank you for your feedback. What could we improve?",
     "buttonText": "Send Feedback",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
   },
