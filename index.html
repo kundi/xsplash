@@ -54,6 +54,31 @@ there are two modes:
 1. message with button
 2. feedback input with message
 */
+function getAllQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    let queryParams = {};
+
+    for (let [key, value] of params.entries()) {
+        queryParams[key] = value;
+    }
+
+    return queryParams;
+}
+
+function appendQueryParamsToUrl(baseUrl, params) {
+    // Create a new URL object
+    const url = new URL(baseUrl);
+
+    // Iterate over the params hash and set each key-value pair in the URL's search parameters
+    for (let key in params) {
+        url.searchParams.set(key, params[key]);
+    }
+
+    // Return the updated URL as a string
+    return url.toString();
+}
+
+
     $(document).ready(function () {
       const identifier = new URLSearchParams(window.location.search).get(
         "id"
@@ -100,9 +125,13 @@ there are two modes:
         $("#userForm").submit(function (e) {
           e.preventDefault();
 
+          // append query params to the submit url
+          const queryParams = getAllQueryParams();
+          const submitUrl = appendQueryParamsToUrl(splash.inputSubmitUrl, queryParams);
+
           $.ajax({
             type: "POST",
-            url: splash.inputSubmitUrl,
+            url: submitUrl,
             data: $(this).serialize(),
             success: function (response) {
               // Here you handle what to do when submission is successful.

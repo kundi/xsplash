@@ -13,7 +13,7 @@
     "input": true,
     "inputMessage": "Thank you for your feedback. What could we improve?",
     "inputButtonText": "Send Feedback",
-    "inputSubmitUrl": "https://app.nightwatch.io/signup?ref=nouser",
+    "inputSubmitUrl": "https://nightwatch.app.n8n.cloud/webhook/nwxnps",
     "message": "Thank you for your feedback. What could we improve?",
     "buttonText": "Send Feedback",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
