@@ -13,7 +13,7 @@
     "input": true,
     "inputMessage": "Thank you for your feedback. What could we improve?",
     "inputButtonText": "Send Feedback",
-    "inputSubmitUrl": "https://nightwatch.app.n8n.cloud/webhook/nwxnps",
+    "inputSubmitUrl": "https://app.windmill.dev/api/w/kundi/jobs/run_wait_result/f/f/subzero/capture_flow?token=H5uXB5U9kXcLeUxlAIhoR6JCPAFcUb",
     "message": "Thank you for your feedback. What could we improve?",
     "buttonText": "Send Feedback",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
