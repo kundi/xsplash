@@ -9,6 +9,11 @@
     "buttonText": "Sign-up Now",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
   },
+  "get-research": {
+    "message": "Thank you. One of our experts will reach out to you with the SEO keyword research details.",
+    "buttonText": "Login to Nightwatch",
+    "buttonLink": "https://app.nightwatch.io/login"
+  },
   "nps": {
     "input": true,
     "inputMessage": "Thank you for your feedback. What could we improve?",
