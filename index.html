@@ -6,20 +6,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nightwatch Request</title>
   <!-- Include the Tailwind CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: black;
     }
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
+<template id="npsScore">
+<!-- component -->
+<main class="grid w-full place-items-center mb-10">
+
+  <p class="text-white mb-6">Loading...</p>
+
+  <div class="grid w-full grid-cols-2 mb-2">
+    <div class="text-left text-gray-300 text-xs">Least Likely</div>
+    <div class="text-right text-gray-300 text-xs">Most Likely</div>
+  </div>
+
+  <div class="grid w-full wx-[10rem] grid-cols-10 gap-0 rounded-l bg-gray-200 p-1">
+      <div>
+          <input type="radio" name="score" id="1" value="1" class="peer hidden" />
+          <label for="1" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">1</label>
+      </div>
+
+      <div>
+          <input type="radio" name="score" id="2" value="2" class="peer hidden" />
+          <label for="2" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">2</label>
+      </div>
+
+      <div>
+          <input type="radio" name="score" id="3" value="3" class="peer hidden" />
+          <label for="3" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">3</label>
+      </div>
+
+      <div>
+          <input type="radio" name="score" id="4" value="4" class="peer hidden" />
+          <label for="4" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">4</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="5" value="5" class="peer hidden" />
+        <label for="5" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">5</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="6" value="6" class="peer hidden" />
+        <label for="6" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">6</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="7" value="7" class="peer hidden" />
+        <label for="7" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">7</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="8" value="8" class="peer hidden" />
+        <label for="8" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">8</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="9" value="9" class="peer hidden" />
+        <label for="9" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">9</label>
+      </div>
+
+      <div>
+        <input type="radio" name="score" id="10" value="10" class="peer hidden" />
+        <label for="10" class="block cursor-pointer select-none rounded-l p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">10</label>
+      </div>
+
+  </div>
+</main>
+
+</template>
 <body class="flex items-center justify-center h-screen">
+
+  <div class="max-w-sm mx-auto">
+
   <div class="text-center">
 
-    <div class="logo flex justify-center items-center mb-4">
+    <div class="logo flex justify-center items-center mb-10">
         <a href="https://nightwatch.io/?ref+splash">
             <img src="logo.svg" alt="Nightwatch" class="w-24" />
         </a>
@@ -34,18 +103,27 @@
 
     <div id="userInput" class="input" style="display: none">
       <form id="userForm">
+
+        <div id="targetInput"></div>
+
         <p class="text-white mb-6">Loading...</p>
-        <textarea name="message" id="message" rows="4" placeholder="Please explain your rating"
+
+        <textarea name="message" id="message" rows="4" placeholder="Explain your rating"
           class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset my-5"></textarea>
+        
         <button type="submit" class="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
           Loading...
         </button>
+
         <!-- Error message div -->
         <div id="errorMessage" class="mt-4 text-red-500 hidden" style="display: none;">
           
         </div>
       </form>
     </div>
+
+  </div>
+
   </div>
 
   <script>
@@ -78,6 +156,12 @@ function appendQueryParamsToUrl(baseUrl, params) {
     return url.toString();
 }
 
+function renderTemplate(templateId, targetId) {
+  const template = document.getElementById(templateId).content;
+  const clone = document.importNode(template, true);
+  document.getElementById(targetId).appendChild(clone);
+}
+
 
     $(document).ready(function () {
       const identifier = new URLSearchParams(window.location.search).get(
@@ -90,8 +174,9 @@ function appendQueryParamsToUrl(baseUrl, params) {
       }
 
       // Fetch the JSON data from your endpoint
-      const endpoint = 'https://splash.nightwatch.io';
-      // const endpoint = "http://localhost:8001";
+      // const endpoint = 'https://splash.nightwatch.io';
+      // const endpoint = "http://localhost:8002";
+      const endpoint = "";
 
       $.getJSON(endpoint + "/ids.json", function (data) {
         if (data[identifier]) {
@@ -122,28 +207,48 @@ function appendQueryParamsToUrl(baseUrl, params) {
         const $inputButton = $("#userInput button");
         $inputButton.text(splash.inputButtonText);
 
-        $("#userForm").submit(function (e) {
-          e.preventDefault();
+        if (splash.inputType === "nps") {
 
-          // append query params to the submit url
+          renderTemplate('npsScore', 'targetInput');
+
+          $("#targetInput p").text(splash.npsQuestion);
+
           const queryParams = getAllQueryParams();
-          const submitUrl = appendQueryParamsToUrl(splash.inputSubmitUrl, queryParams);
+          if (queryParams['score']) {
+            $(`input[name="score"][value="${queryParams['score']}"]`).prop('checked', true);
+          }
+        }
 
-          $.ajax({
-            type: "POST",
-            url: submitUrl,
-            data: $(this).serialize(),
-            success: function (response) {
-              // Here you handle what to do when submission is successful.
-              $("#userInput").hide();
-              $("#userMessage").show();
-            },
-            error: function (error) {
-              // Handle errors here, maybe alert the user?
-              console.log(error);
-            },
-          });
+        $("#userForm").submit(function (e) {
+          // Check if the score is set in NPS mode
+          if (splash.inputType === "nps" && !$("input[name='score']:checked").val()) {
+            // Show validation error
+            $("#errorMessage").text("Please select a score.").show();
+          } else {
+            // append query params to the submit url
+            const queryParams = getAllQueryParams();
+            const submitUrl = appendQueryParamsToUrl(splash.inputSubmitUrl, queryParams);
+
+            $.ajax({
+              type: "POST",
+              url: submitUrl,
+              data: $(this).serialize(),
+              success: function (response) {
+                // Here you handle what to do when submission is successful.
+                $("#userInput").hide();
+                $("#userMessage").show();
+              },
+              error: function (error) {
+                // Handle errors here, maybe alert the user?
+                console.log(error);
+              },
+            });
+          }
+
+          // Prevent form submission
+          e.preventDefault();
         });
+
       }
     }
   </script>

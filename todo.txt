@@ -1,0 +1,6 @@
+- tests
+- mobile render D
+- validation on input D
+- store query params
+- posthog tracking
+- 

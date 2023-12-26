@@ -3,7 +3,7 @@ import socketserver
 import signal
 import sys
 
-PORT = 8001
+PORT = 8005
 
 class NoCacheRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -12,16 +12,17 @@ class NoCacheRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Expires', '0')
         super().end_headers()
 
+httpd = socketserver.TCPServer(("", PORT), NoCacheRequestHandler)
+
 def signal_handler(signal, frame):
     print("\nShutting down the server...")
-    httpd.shutdown()
+    httpd.server_close()
     sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
 
-with socketserver.TCPServer(("", PORT), NoCacheRequestHandler) as httpd:
-    print(f"Server is running on http://localhost:{PORT}")
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
+print(f"Server is running on http://localhost:{PORT}")
+try:
+    httpd.serve_forever()
+except KeyboardInterrupt:
+    pass

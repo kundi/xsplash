@@ -5,14 +5,9 @@
     "buttonLink": "https://app.nightwatch.io/login?ref=reactivation"
   },
   "nouser": {
-    "message": "No user matching the criteria. You can still register a new users and start using Nightwatch.",
+    "message": "No user matching the criteria. You can still register and start using Nightwatch.",
     "buttonText": "Sign-up Now",
     "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
-  },
-  "get-research": {
-    "message": "Thank you. One of our experts will reach out to you with the SEO keyword research details.",
-    "buttonText": "Login to Nightwatch",
-    "buttonLink": "https://app.nightwatch.io/login"
   },
   "nps": {
     "input": true,

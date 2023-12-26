@@ -1,0 +1,18 @@
+{
+  "nouser": {
+    "message": "No user matching the criteria. You can still register and start using Formaviva.",
+    "buttonText": "Sign-up Now",
+    "buttonLink": "https://app.nightwatch.io/signup?ref=nouser"
+  },
+  "nps": {
+    "input": true,
+    "inputType": "nps",
+    "npsQuestion": "How likely are you to recommend Formaviva to a friend or colleague?",
+    "inputMessage": "What's the reason for your rating?",
+    "inputButtonText": "Send Feedback",
+    "inputSubmitUrl": "https://wopeauyedwfkdvultzqt.supabase.co/functions/v1/c/formaviva-nps",
+    "message": "Thank you for your feedback.",
+    "buttonText": "Go to Formaviva",
+    "buttonLink": "https://formaviva.com"
+  }
+}
