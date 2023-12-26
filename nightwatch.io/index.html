@@ -357,6 +357,7 @@ there are two modes:
                 error: function (error) {
                   // Handle errors here, maybe alert the user?
                   console.log(error);
+                  $("#errorMessage").text("Could not submit the feedback - please get in touch.").show();
                 },
               });
             }
