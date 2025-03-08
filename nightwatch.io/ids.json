@@ -1,4 +1,9 @@
 {
+  "agent_access": {
+    "message": "Your NightOwl SEO Agent access was requested. Make sure that you have a Nightwatch account to be approved.",
+    "buttonText": "Signup for Nightwatch",
+    "buttonLink": "https://app.nightwatch.io/signup?ref=agent"
+  },
   "reactivate": {
     "message": "Your 14-day trial was successfully reactivated. You can now utilize Nightwatch to improve your website visibility at its full power.",
     "buttonText": "Login to Nightwatch",
